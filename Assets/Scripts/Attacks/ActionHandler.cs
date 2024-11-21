@@ -6,6 +6,7 @@ public class ActionHandler : MonoBehaviour, IObservable
     #region Fields
 
     [SerializeField] private AbilityHandler _abilityHandler;
+    [SerializeField] private MineSpawner _mineSpawner;
 
     private ElympicsInt _currentActionState = new();
 
@@ -19,7 +20,8 @@ public class ActionHandler : MonoBehaviour, IObservable
 
     #region Public Methods
 
-    public void HandleActions(bool attack, bool block, long tick)
+    //Kinda ew even for a course...
+    public void HandleActions(bool attack, bool block, bool spawnMine, long tick)
     {
         ActionState lastState = (ActionState)_currentActionState.Value;
         switch (lastState)
@@ -54,6 +56,8 @@ public class ActionHandler : MonoBehaviour, IObservable
                 _abilityHandler.ProcessBlock(tick);
                 break;
         }
+
+        if (spawnMine) _mineSpawner.TrySpawningMine(tick);
     }
 
     #endregion

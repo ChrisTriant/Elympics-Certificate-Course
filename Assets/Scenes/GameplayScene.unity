@@ -8974,6 +8974,10 @@ PrefabInstance:
       propertyPath: networkId
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4922083409462560673, guid: 1eaf63e16950237449121061b07cd07f, type: 3}
+      propertyPath: _mineCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5816453104347538103, guid: 1eaf63e16950237449121061b07cd07f, type: 3}
       propertyPath: networkId
       value: 24

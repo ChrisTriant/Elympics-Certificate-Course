@@ -33,6 +33,7 @@ public class InputHandler : MonoBehaviour
         //Gather ability input and preserve the values across frames and until the GetInput method is called.
         _gatheredInput.Attack = Input.GetKeyDown(KeyCode.Mouse0) || _gatheredInput.Attack;  
         _gatheredInput.Block = Input.GetKeyDown(KeyCode.Mouse1) || _gatheredInput.Block;
+        _gatheredInput.SpawnMine = Input.GetKeyDown(KeyCode.Space) || _gatheredInput.SpawnMine;
     }
 
     public GatheredInput GetInput()
@@ -42,6 +43,7 @@ public class InputHandler : MonoBehaviour
         _gatheredInput.MouseWorldPosition = DefaultMouseWorldPosition;
         _gatheredInput.Attack = false;
         _gatheredInput.Block = false;
+        _gatheredInput.SpawnMine = false;
         return returnedInput;
     }
 
@@ -68,4 +70,5 @@ public struct GatheredInput
     public Vector3 MouseWorldPosition;
     public bool Attack;
     public bool Block;
+    public bool SpawnMine;
 }

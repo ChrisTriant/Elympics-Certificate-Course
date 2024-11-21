@@ -40,6 +40,7 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
         currentInput.MouseWorldPosition = _inputHandler.DefaultMouseWorldPosition;
         currentInput.Attack = false;
         currentInput.Block = false;
+        currentInput.SpawnMine = false;
 
         if(ElympicsBehaviour.TryGetInput(PredictableFor, out var inputReader))
         {
@@ -50,10 +51,11 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
             inputReader.Read(out currentInput.MouseWorldPosition.z);
             inputReader.Read(out currentInput.Attack);
             inputReader.Read(out currentInput.Block);
+            inputReader.Read(out currentInput.SpawnMine);
         }
 
         _movementHandler.HandleMovement(currentInput.MovementInput, currentInput.MouseWorldPosition);
-        _actionHandler.HandleActions(currentInput.Attack , currentInput.Block, Elympics.Tick);
+        _actionHandler.HandleActions(currentInput.Attack , currentInput.Block, currentInput.SpawnMine, Elympics.Tick);
     }
 
     public void OnInputForClient(IInputWriter inputSerializer)
@@ -66,6 +68,7 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
         inputSerializer.Write(input.MouseWorldPosition.z);
         inputSerializer.Write(input.Attack);
         inputSerializer.Write(input.Block);
+        inputSerializer.Write(input.SpawnMine);
     }
 
 

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8948976166399117108}
   - component: {fileID: 8783972062918345892}
   - component: {fileID: 2037718257193584350}
+  - component: {fileID: 4922083409462560673}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -105,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 96
+  networkId: 104
   predictableFor:
     playerIndex: 0
   isUpdatableForNonOwners: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityHandler: {fileID: 2037718257193584350}
+  _mineSpawner: {fileID: 4922083409462560673}
 --- !u!114 &2037718257193584350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +243,20 @@ MonoBehaviour:
   _attackDamage: 10
   _blockDuration: 30
   _blockCooldown: 15
+--- !u!114 &4922083409462560673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3530788642312757472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87903e0389748244fbdf17c9f313f6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minePrefab: {fileID: 7003628283107272183, guid: 0798dfc034a96c9479b1d59cc96879ec, type: 3}
+  _mineCooldown: 90
 --- !u!1 &4692214107565793433
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 94
+  networkId: 102
   predictableFor:
     playerIndex: 0
   isUpdatableForNonOwners: 0
@@ -556,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 97
+  networkId: 105
   predictableFor:
     playerIndex: 0
   isUpdatableForNonOwners: 0
@@ -646,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceNetworkId: 0
-  networkId: 95
+  networkId: 103
   predictableFor:
     playerIndex: -2
   isUpdatableForNonOwners: 0
