@@ -1,8 +1,15 @@
 using Elympics;
+using System;
 using UnityEngine;
 
 public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
 {
+    #region Events
+
+    [SerializeField] private PlayerHandlerEventChannelSO _onPlayerDied;
+
+    #endregion
+
     #region Fields
 
     [SerializeField] private InputHandler _inputHandler;
@@ -10,6 +17,10 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
     [SerializeField] private ActionHandler _actionHandler;
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private int _playerID;
+    [SerializeField] private string _playerName;
+    [SerializeField] private Color _playerColor;
+
+    private ElympicsBool _isPlayerActive = new();
 
     #endregion
 
@@ -18,15 +29,28 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
     public PlayerHealth Health => _playerHealth;
 
     public int ID => _playerID;
+    public string PlayerName => _playerName;
+    public Color PlayerColor => _playerColor;
 
     #endregion
 
     #region LifeCycle
 
+    private void Awake()
+    {
+        _isPlayerActive.Value = true;
+        BindEvents();
+    }
+
     private void Update()
     {
         if (Elympics.Player == PredictableFor)
             _inputHandler.UpdateInput();
+    }
+
+    private void OnDestroy()
+    {
+        UnbindEvents();
     }
 
     #endregion
@@ -35,6 +59,8 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
 
     public void ElympicsUpdate()
     {
+        if (!_isPlayerActive.Value) return;
+
         GatheredInput currentInput;
         currentInput.MovementInput = Vector2.zero;
         currentInput.MouseWorldPosition = _inputHandler.DefaultMouseWorldPosition;
@@ -71,10 +97,33 @@ public class PlayerHandler : ElympicsMonoBehaviour, IInputHandler, IUpdatable
         inputSerializer.Write(input.SpawnMine);
     }
 
+    public void EnablePlayer() => _isPlayerActive.Value = true;
+    public void DisablePlayer() => _isPlayerActive.Value = false;
+
 
     public void OnInputForBot(IInputWriter inputSerializer)
     {
 
+    }
+
+
+    #endregion
+
+    #region Private Methods
+
+    private void BindEvents()
+    {
+        _playerHealth.SubcribeToHealthChange(OnHealthChanged);
+    }
+
+    private void UnbindEvents()
+    {
+        _playerHealth.UnsubcribeToHealthChange(OnHealthChanged);
+    }
+
+    private void OnHealthChanged(float lastValue, float newValue)
+    {
+        if (newValue == 0) _onPlayerDied.RaiseEvent(this);
     }
 
     #endregion

@@ -21,18 +21,24 @@ public class PlayerHealth : MonoBehaviour, IObservable, IInitializable
 
     #region Public Methods
 
+    //IInitializable
+    public void Initialize()
+    {
+        _currentHealth.Value = _maxHealth;
+    }
+
     public void DealDamage(float damage)
     {
         if (_actionHandler.CurrentActionState == ActionHandler.ActionState.Blocking) return;
 
         if (_currentHealth.Value > 0)
+        {
             _currentHealth.Value = Mathf.Clamp(_currentHealth.Value - damage, 0, _maxHealth);
+        }
     }
 
-    public void Initialize()
-    {
-        _currentHealth.Value = _maxHealth;
-    }
+    public void SubcribeToHealthChange(ElympicsVar<float>.ValueChangedCallback onHealthChangedCallback) => _currentHealth.ValueChanged += onHealthChangedCallback;
+    public void UnsubcribeToHealthChange(ElympicsVar<float>.ValueChangedCallback onHealthChangedCallback) => _currentHealth.ValueChanged -= onHealthChangedCallback;
 
     #endregion
 }

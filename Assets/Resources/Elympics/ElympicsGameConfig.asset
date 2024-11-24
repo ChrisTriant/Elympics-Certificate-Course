@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameName: Online Course
   gameId: 0d22a6e3-fca0-4b90-85d3-df6b22254a2d
-  gameVersion: 1
+  gameVersion: 5
   players: 2
   gameplayScene: Assets/Scenes/GameplayScene.unity
   gameplaySceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
@@ -39,8 +39,8 @@ MonoBehaviour:
   prediction: 1
   predictionLimitInTicks: 8
   detailedNetworkLog: 0
-  mode: 1
-  halfRemoteMode: 0
+  mode: 2
+  halfRemoteMode: 1
   ipForHalfRemoteMode: 127.0.0.1
   tcpPortForHalfRemoteMode: 9101
   webPortForHalfRemoteMode: 9102
@@ -49,12 +49,12 @@ MonoBehaviour:
     queueName: 
     regionName: 
   testPlayers:
-  - userId: 
+  - userId: 0
     isBot: 0
     botDifficulty: 0
     gameEngineData: 
     matchmakerData: []
-  - userId: 
+  - userId: 1
     isBot: 0
     botDifficulty: 0
     gameEngineData: 
